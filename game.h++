@@ -1,3 +1,6 @@
+#ifndef GAME_H // GAME_H header guard
+#define GAME_H
+
 class Game {
     public:
         Game(); // Default Constructor
@@ -14,3 +17,5 @@ class Game {
         sf::RenderWindow mWindow;
         sf::RectangleShape mDoor;
 };
+
+#endif // GAME_H header guard
