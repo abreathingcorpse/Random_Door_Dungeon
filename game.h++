@@ -16,6 +16,7 @@ class Game {
         // Private members
         sf::RenderWindow mWindow;
         sf::RectangleShape mDoor;
+        sf::View mView;
 };
 
 #endif // GAME_H header guard
