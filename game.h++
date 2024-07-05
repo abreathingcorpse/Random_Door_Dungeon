@@ -21,6 +21,10 @@ class Game {
         sf::View mView;
         sf::Font mFont;
         sf::Text mText;
+        int mDoorWidth = 130;
+        int mDoorHeight = 180;
+        int mDoorX = 460;
+        int mDoorY = 460;
 };
 
 #endif // GAME_H header guard

@@ -11,9 +11,10 @@ Game::Game() : //mWindow(sf::VideoMode(1920,1080), "Random Door Dungeon", sf::St
                mFont(),
                mText()
                {
-                mDoor.setSize(sf::Vector2f(50,100));
+                mDoor.setSize(sf::Vector2f(mDoorWidth,mDoorHeight));
+//                mDoor.setSize(sf::Vector2f(50,100));
                 mDoor.setFillColor(sf::Color::Red);
-                mDoor.setPosition(100,100);
+                mDoor.setPosition(mDoorX,mDoorY);
                }
 
 void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio) {
@@ -45,11 +46,49 @@ void Game::processEvents() {
 //            std::cout << "current ratio: " << current_aspect_ratio << std::endl;
             resizeToAspectRatio(desired_aspect_ratio, current_aspect_ratio);
         }
+
+        // Resize the Door Dimensions
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){
+            mDoorHeight += 10;
+            std::cout << "Current Door dimensions: (" << mDoorWidth << "," << mDoorHeight << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)){
+            mDoorHeight -= 10;
+            std::cout << "Current Door dimensions: (" << mDoorWidth << "," << mDoorHeight << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::H)){
+            mDoorWidth -= 10;
+            std::cout << "Current Door dimensions: (" << mDoorWidth << "," << mDoorHeight << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){
+            mDoorWidth += 10;
+            std::cout << "Current Door dimensions: (" << mDoorWidth << "," << mDoorHeight << ")" << std::endl;
+        }
+
+        // Update the Door position
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+            mDoorY -= 10;
+            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+            mDoorX -= 10;
+            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+            mDoorY += 10;
+            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+            mDoorX += 10;
+            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+        }
     }
 }
 
 void Game::update(sf::Time deltaTime) {
     // Such emptiness
+    mDoor.setSize(sf::Vector2f(mDoorWidth,mDoorHeight));
+    mDoor.setPosition(mDoorX,mDoorY);
 }
 
 void Game::render() {
