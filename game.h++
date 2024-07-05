@@ -1,6 +1,5 @@
 #ifndef GAME_H // GAME_H header guard
 #define GAME_H
-#include "textConfig.h++"
 
 class Game {
     public:
@@ -21,7 +20,6 @@ class Game {
         sf::View mView;
         sf::Font mFont;
         sf::Text mText;
-//        TextConfig mtextConfig;
 };
 
 #endif // GAME_H header guard

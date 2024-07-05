@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "game.h++"
-#include "textConfig.h++"
 #include <iostream>
 #include <string>
 
@@ -15,9 +14,6 @@ Game::Game() : //mWindow(sf::VideoMode(1920,1080), "Random Door Dungeon", sf::St
                 mDoor.setSize(sf::Vector2f(50,100));
                 mDoor.setFillColor(sf::Color::Red);
                 mDoor.setPosition(100,100);
-//                mtextConfig.loadFont(pathToFontFile);
-//                mtextConfig.configText(mtextConfig.mFont, 24, sf::Color::White);
-//                mtextConfig.textToDraw("Str: ");
                }
 
 void Game::processEvents() {
@@ -57,7 +53,6 @@ void Game::render() {
     map.setFillColor(sf::Color(185,184,181));
     mWindow.draw(map);
     mWindow.draw(mDoor);
-//    mWindow.draw(mtextConfig.mText);
     mWindow.draw(mText);
     mWindow.display();
 }
@@ -77,7 +72,6 @@ void Game::run() {
     sf::Clock clock;
     sf::Time elapsedTime;
     const sf::Time framerate = sf::seconds(1.f/60); // .f forces it to be a float, so that it's not 0
-//    sf::Text testText("Str: ", mtextConfig.mFont);
     preConfigureText();
 
     while(mWindow.isOpen()){
