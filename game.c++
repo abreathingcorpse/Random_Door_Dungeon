@@ -68,27 +68,38 @@ void Game::processEvents() {
         // Update the Door position
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
             mDoorY -= 10;
-            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+            std::cout << "Current Door position: (" << mDoorX << "," << mDoorY << ")" << std::endl;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
             mDoorX -= 10;
-            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+            std::cout << "Current Door position: (" << mDoorX << "," << mDoorY << ")" << std::endl;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
             mDoorY += 10;
-            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+            std::cout << "Current Door postion: (" << mDoorX << "," << mDoorY << ")" << std::endl;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
             mDoorX += 10;
-            std::cout << "Current Door dimensions: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+            std::cout << "Current Door position: (" << mDoorX << "," << mDoorY << ")" << std::endl;
+        }
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Middle)) {
+            std::cout << "Mouse position relative to the window: (" << mMousePosition.x << "," << mMousePosition.y << ")" << std::endl;
+            std::cout << "Mouse position relative to the view: (" << mMouseViewPosition.x << "," << mMouseViewPosition.y << ")" << std::endl;
+        }
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            if ((mMouseViewPosition.x > mDoorX && mMouseViewPosition.x < mDoorX + mDoorWidth) &&
+                (mMouseViewPosition.y > mDoorY && mMouseViewPosition.y < mDoorY + mDoorHeight)) {
+                    mDoor.setFillColor(sf::Color::Green);
+                }
         }
     }
 }
 
 void Game::update(sf::Time deltaTime) {
-    // Such emptiness
     mDoor.setSize(sf::Vector2f(mDoorWidth,mDoorHeight));
     mDoor.setPosition(mDoorX,mDoorY);
+    mMousePosition = sf::Mouse::getPosition(mWindow);
+    mMouseViewPosition = mWindow.mapPixelToCoords(mMousePosition,mView);
 }
 
 void Game::render() {

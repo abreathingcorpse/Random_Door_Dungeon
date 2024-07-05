@@ -25,6 +25,8 @@ class Game {
         int mDoorHeight = 180;
         int mDoorX = 460;
         int mDoorY = 460;
+        sf::Vector2i mMousePosition;
+        sf::Vector2f mMouseViewPosition;
 };
 
 #endif // GAME_H header guard
