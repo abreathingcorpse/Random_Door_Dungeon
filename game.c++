@@ -16,6 +16,19 @@ Game::Game() : //mWindow(sf::VideoMode(1920,1080), "Random Door Dungeon", sf::St
                 mDoor.setPosition(100,100);
                }
 
+void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio) {
+    if (current_aspect_ratio > desired_aspect_ratio) {
+        mView.setViewport(sf::FloatRect((1 - desired_aspect_ratio/current_aspect_ratio) /
+                                        2.f, 0.f, desired_aspect_ratio/current_aspect_ratio, 1.f));
+    } else if (current_aspect_ratio < desired_aspect_ratio) {
+        mView.setViewport(sf::FloatRect(0.f, (1 - current_aspect_ratio/desired_aspect_ratio) /
+                                        2.f, 1.f, current_aspect_ratio/desired_aspect_ratio));
+    } else {
+        mView.setViewport(sf::FloatRect(0.f,0.f,1.f,1.f));
+    }
+}
+
+
 void Game::processEvents() {
     sf::Event event;
 
@@ -23,20 +36,14 @@ void Game::processEvents() {
         if (event.type == sf::Event::Closed)
             mWindow.close();
         if (event.type == sf::Event::Resized) {
-            std::cout << "(" << event.size.width << ","
-                      << event.size.height << ")" << std::endl;
+//            std::cout << "(" << event.size.width << ","
+//                      << event.size.height << ")" << std::endl;
+            // Hardcoded desired aspect ratio. This could be chosen by the user in the future.
             float desired_aspect_ratio = 1920.f / 1080.f;
             float current_aspect_ratio = static_cast<float>(event.size.width) / static_cast<float>(event.size.height);
 
-            std::cout << "current ratio: " << current_aspect_ratio << std::endl;
-
-            if (current_aspect_ratio > desired_aspect_ratio) {
-                mView.setViewport(sf::FloatRect((1-desired_aspect_ratio/current_aspect_ratio)/2.f, 0.f, desired_aspect_ratio/current_aspect_ratio, 1.f));
-            } else if (current_aspect_ratio < desired_aspect_ratio) {
-                mView.setViewport(sf::FloatRect(0.f, (1-current_aspect_ratio/desired_aspect_ratio)/2.f, 1.f, current_aspect_ratio/desired_aspect_ratio));
-            } else {
-                mView.setViewport(sf::FloatRect(0.f,0.f,1.f,1.f));
-            }
+//            std::cout << "current ratio: " << current_aspect_ratio << std::endl;
+            resizeToAspectRatio(desired_aspect_ratio, current_aspect_ratio);
         }
     }
 }
