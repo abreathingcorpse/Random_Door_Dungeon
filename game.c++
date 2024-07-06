@@ -87,10 +87,17 @@ void Game::processEvents() {
             std::cout << "Mouse position relative to the view: (" << mMouseViewPosition.x << "," << mMouseViewPosition.y << ")" << std::endl;
         }
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            if ((mMouseViewPosition.x > mDoorX && mMouseViewPosition.x < mDoorX + mDoorWidth) &&
-                (mMouseViewPosition.y > mDoorY && mMouseViewPosition.y < mDoorY + mDoorHeight)) {
-                    mDoor.setFillColor(sf::Color::Green);
+            for (int i=0; i<3; i++) {
+                int doorX0 = mDoorX + i * (mDoorWidth + mSpaceBetweenDoors);
+                int doorX1 = mDoorX + mDoorWidth + i * (mDoorWidth + mSpaceBetweenDoors);
+                std::cout << "doorX0: " << doorX0 << "," << "doorX1: " << doorX1 << std::endl;
+                if (
+                        (mMouseViewPosition.x > doorX0 && mMouseViewPosition.x < doorX1) &&
+                        ((mMouseViewPosition.y > mDoorY && mMouseViewPosition.y < mDoorY + mDoorHeight))
+                ) {
+                        mDoor.setFillColor(sf::Color::Green);
                 }
+            }
         }
     }
 }
@@ -111,7 +118,7 @@ void Game::render() {
     mWindow.draw(map);
     // Render all three doors
     for (int i=0; i<3; i++) {
-        mDoor.setPosition(mDoorX + i * mSpaceBetweenDoors, mDoorY);
+        mDoor.setPosition(mDoorX + i * (mDoorWidth + mSpaceBetweenDoors), mDoorY);
         mWindow.draw(mDoor);
     }
     mWindow.draw(mText);
