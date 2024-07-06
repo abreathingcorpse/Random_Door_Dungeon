@@ -23,10 +23,11 @@ class Game {
         sf::Text mText;
         int mDoorWidth = 130;
         int mDoorHeight = 180;
-        int mDoorX = 460;
+        int mDoorX = 580;
         int mDoorY = 460;
         sf::Vector2i mMousePosition;
         sf::Vector2f mMouseViewPosition;
+        int mSpaceBetweenDoors = 300;
 };
 
 #endif // GAME_H header guard

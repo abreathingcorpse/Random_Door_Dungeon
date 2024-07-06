@@ -109,7 +109,11 @@ void Game::render() {
     sf::RectangleShape map(sf::Vector2f (1920.f, 1080.f));
     map.setFillColor(sf::Color(185,184,181));
     mWindow.draw(map);
-    mWindow.draw(mDoor);
+    // Render all three doors
+    for (int i=0; i<3; i++) {
+        mDoor.setPosition(mDoorX + i * mSpaceBetweenDoors, mDoorY);
+        mWindow.draw(mDoor);
+    }
     mWindow.draw(mText);
     mWindow.display();
 }
