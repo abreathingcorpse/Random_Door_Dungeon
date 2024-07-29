@@ -1,5 +1,6 @@
 #ifndef GAME_H // GAME_H header guard
 #define GAME_H
+#include "door.h++"
 
 class Game {
     public:
@@ -17,14 +18,15 @@ class Game {
 
         // Private members
         sf::RenderWindow mWindow;
-        sf::RectangleShape mDoor;
+        Door mDoor;
+ //       sf::RectangleShape mDoor;
         sf::View mView;
         sf::Font mFont;
         sf::Text mText;
-        int mDoorWidth = 130;
-        int mDoorHeight = 180;
-        int mDoorX = 580;
-        int mDoorY = 460;
+//        int mDoorWidth = 130;
+//        int mDoorHeight = 180;
+//        int mDoorX = 580;
+//        int mDoorY = 460;
         sf::Vector2i mMousePosition;
         sf::Vector2f mMouseViewPosition;
         int mSpaceBetweenDoors = 200;
