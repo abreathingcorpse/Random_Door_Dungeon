@@ -16,11 +16,12 @@ class Game {
         void render();
         void preConfigureText();
         void resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio);
+        void initializeDoors();
 
         // Private members
         sf::RenderWindow mWindow;
-        Door mDoor;
-//        std::vector<Door> mDoors;
+//        Door mDoor;
+        std::vector<Door> mDoors;
         sf::View mView;
         sf::Font mFont;
         sf::Text mText;

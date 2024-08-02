@@ -7,6 +7,7 @@
 
 #include "door.h++"
 
+// Default Constructor
 Door::Door() : 
     mDoorDimensions(130.f,180.f),
     mDoorPosition(580.f,460.f)
@@ -16,8 +17,9 @@ Door::Door() :
         setPosition(mDoorPosition.x,mDoorPosition.y);
     }
 
+// Constructor Initializer List
 Door::Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition, 
-    sf::Color DoorColor) /*:*/ {
+    sf::Color DoorColor) {
         mDoorDimensions = DoorDimensions;
         mDoorPosition = DoorPosition;
         mDoorColor = DoorColor;
