@@ -13,17 +13,11 @@
 Game::Game() : //mWindow(sf::VideoMode(1920,1080), "Random Door Dungeon", sf::Style::Fullscreen),
     mWindow(sf::VideoMode(1920,1080),
            "Random Door Dungeon"),
-   mDoor(),
+   mDoor(sf::Vector2f(130.f,180.f), sf::Vector2f(0,0), sf::Color::Red),
    mView(sf::FloatRect(0.f, 0.f, 1920.f, 1080.f)),
    mFont(),
    mText()
-   {
-//        mDoor.setSize(sf::Vector2f(mDoorDimensions.x,mDoorDimensions.y));
-//                mDoor.setSize(sf::Vector2f(mDoorWidth,mDoorHeight));
-//        mDoor.setFillColor(sf::Color::Red);
-//        mDoor.setPosition(mDoorPosition.x,mDoorPosition.y);
-//                mDoor.setPosition(mDoorX,mDoorY);
-   }
+   { }
 
 void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio) {
     if (current_aspect_ratio > desired_aspect_ratio) {
@@ -96,19 +90,21 @@ void Game::processEvents() {
 //        }
 
         // Check if a door was clicked on
-//        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 //            for (int i=0; i<3; i++) {
 //                int doorX0 = mDoorX + i * (mDoorWidth + mSpaceBetweenDoors);
 //                int doorX1 = mDoorX + mDoorWidth + i * (mDoorWidth + mSpaceBetweenDoors);
 //                std::cout << "doorX0: " << doorX0 << "," << "doorX1: " << doorX1 << std::endl;
-//                if (
-//                        (mMouseViewPosition.x > doorX0 && mMouseViewPosition.x < doorX1) &&
-//                        ((mMouseViewPosition.y > mDoorY && mMouseViewPosition.y < mDoorY + mDoorHeight))
-//                ) {
-//                        mDoor.setFillColor(sf::Color::Green);
-//                }
+                if (
+                    (mMouseViewPosition.x > mDoor.mDoorPosition.x &&
+                    mMouseViewPosition.x < mDoor.mDoorPosition.x + mDoor.mDoorDimensions.x) &&
+                    (mMouseViewPosition.y > mDoor.mDoorPosition.y &&
+                    mMouseViewPosition.y < mDoor.mDoorPosition.y + mDoor.mDoorDimensions.y)
+                ) {
+                        mDoor.setFillColor(sf::Color::Green);
+                }
 //            }
-//        }
+        }
     }
 }
 

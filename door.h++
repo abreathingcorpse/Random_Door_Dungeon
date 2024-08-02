@@ -12,18 +12,13 @@ class Door : public sf::RectangleShape {
 
     public:
         Door(); // Default Constructor
+        Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition,
+            sf::Color DoorColor);
         sf::Vector2f mDoorDimensions;
         sf::Vector2f mDoorPosition;
+        sf::Color mDoorColor;
 
     private:
-//        sf::Vector2i mDoorDimensions;
-//        mDoorDimensions.x = 130;
-//        mDoorDimensions.y = 180;
-//        sf::Vector2i mDoorDimensions(130,180);
-//        sf::Vector2i mDoorPosition;
-//        mDoorPosition.x = 580;
-//        mDoorPosition.y = 460;
-//        sf::Vector2i mDoorPosition(580,460);
 };
 
 #endif // DOOR_G header guard
