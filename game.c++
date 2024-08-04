@@ -32,8 +32,11 @@ void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_
 }
 
 void Game::initializeDoors() {
-   Door aDoor = Door(sf::Vector2f(130.f,180.f), sf::Vector2f(0,0), sf::Color::Red);
-   mDoors.push_back(aDoor);
+    for (int i = 0; i <= 2; i++) {
+        sf::Vector2f doorPosition(580.f + i * mSpaceBetweenDoors,460.f);
+        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition, sf::Color::Red);
+        mDoors.push_back(aDoor);
+    }
 }
 
 void Game::processEvents() {
@@ -95,7 +98,7 @@ void Game::processEvents() {
 
         // Check if a door was clicked on
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-//            for (int i=0; i<3; i++) {
+            for (decltype(mDoors.size()) i=0; i < mDoors.size(); i++) {
 //                int doorX0 = mDoorX + i * (mDoorWidth + mSpaceBetweenDoors);
 //                int doorX1 = mDoorX + mDoorWidth + i * (mDoorWidth + mSpaceBetweenDoors);
 //                std::cout << "doorX0: " << doorX0 << "," << "doorX1: " << doorX1 << std::endl;
@@ -104,14 +107,14 @@ void Game::processEvents() {
 //                    mMouseViewPosition.x < mDoor.mDoorPosition.x + mDoor.mDoorDimensions.x) &&
 //                    (mMouseViewPosition.y > mDoor.mDoorPosition.y &&
 //                    mMouseViewPosition.y < mDoor.mDoorPosition.y + mDoor.mDoorDimensions.y)
-                    (mMouseViewPosition.x > mDoors[0].mDoorPosition.x &&
-                    mMouseViewPosition.x < mDoors[0].mDoorPosition.x + mDoors[0].mDoorDimensions.x) &&
-                    (mMouseViewPosition.y > mDoors[0].mDoorPosition.y &&
-                    mMouseViewPosition.y < mDoors[0].mDoorPosition.y + mDoors[0].mDoorDimensions.y)
+                    (mMouseViewPosition.x > mDoors[i].mDoorPosition.x &&
+                    mMouseViewPosition.x < mDoors[i].mDoorPosition.x + mDoors[i].mDoorDimensions.x) &&
+                    (mMouseViewPosition.y > mDoors[i].mDoorPosition.y &&
+                    mMouseViewPosition.y < mDoors[i].mDoorPosition.y + mDoors[i].mDoorDimensions.y)
                 ) {
-                        mDoors[0].setFillColor(sf::Color::Green);
+                        mDoors[i].setFillColor(sf::Color::Green);
                 }
-//            }
+            }
         }
     }
 }
@@ -133,10 +136,18 @@ void Game::render() {
     map.setFillColor(sf::Color(185,184,181));
     mWindow.draw(map);
     // Render all three doors
+    auto numberOfDoors = mDoors.size(); // numberOfDoors has a weird size type
+    decltype(mDoors.size()) currentDoorIndex = 0; // currentDoorIndex share the same weird size type
+
+    while (currentDoorIndex < numberOfDoors){
+        mWindow.draw(mDoors[currentDoorIndex]);
+//      mWindow.draw(mDoors[0]);
+        currentDoorIndex++;
+    }
 //    for (int i=0; i<3; i++) {
 //       mDoor.setPosition(mDoorX + i * (mDoorWidth + mSpaceBetweenDoors), mDoorY);
 //        mWindow.draw(mDoor);
-        mWindow.draw(mDoors[0]);
+//        mWindow.draw(mDoors[0]);
 //   }
     mWindow.draw(mText);
     mWindow.display();

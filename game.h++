@@ -27,7 +27,7 @@ class Game {
         sf::Text mText;
         sf::Vector2i mMousePosition;
         sf::Vector2f mMouseViewPosition;
-        int mSpaceBetweenDoors = 200;
+        int mSpaceBetweenDoors = 300;
 };
 
 #endif // GAME_H header guard
