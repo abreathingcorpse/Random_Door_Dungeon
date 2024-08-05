@@ -7,6 +7,7 @@
 
 #include "game.h++"
 #include "door.h++"
+#include "ui.h++"
 #include <iostream>
 #include <string>
 
@@ -168,7 +169,8 @@ void Game::run() {
     sf::Clock clock;
     sf::Time elapsedTime;
     const sf::Time framerate = sf::seconds(1.f/60); // .f forces it to be a float, so that it's not 0
-    preConfigureText();
+//    preConfigureText();
+    mUI.loadFont();
     initializeDoors();
 
     while(mWindow.isOpen()){

@@ -1,6 +1,7 @@
 #ifndef GAME_H // GAME_H header guard
 #define GAME_H
 #include "door.h++"
+#include "ui.h++"
 #include <vector>
 
 class Game {
@@ -28,6 +29,7 @@ class Game {
         sf::Vector2i mMousePosition;
         sf::Vector2f mMouseViewPosition;
         int mSpaceBetweenDoors = 300;
+        UI mUI;
 };
 
 #endif // GAME_H header guard
