@@ -8,18 +8,23 @@
 
 #endif // SFML_H header guard
 
+#include <vector>
+
 class UI : public sf::Drawable {
     public:
         UI(); // Default Contructor
         void setPosition(const sf::Vector2f &position);
         void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         void loadFont();
-        void preConfigureText();
+        void fillStatsUI();
 
     private:
         sf::Transformable mTransform;
         sf::Font mFont;
-        sf::Text mText;
+//        sf::Text mText;
+//        sf::CircleShape mStatIcon;
+        std::vector<sf::Text> mStatTexts;
+        std::vector<sf::CircleShape> mStatIcons;
 };
 
 #endif // UI_H header guard

@@ -15,7 +15,7 @@ class Game {
         void processEvents();
         void update(sf::Time deltaTime);
         void render();
-        void preConfigureText();
+//        void preConfigureText();
         void resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio);
         void initializeDoors();
 
