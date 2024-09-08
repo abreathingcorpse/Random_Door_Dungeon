@@ -3,6 +3,7 @@
 #include "door.h++"
 #include "ui.h++"
 #include <vector>
+#include <unordered_set>
 
 class Game {
     public:
@@ -18,6 +19,7 @@ class Game {
 //        void preConfigureText();
         void resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_ratio);
         void initializeDoors();
+        void generate_random_doors();
 
         // Private members
         sf::RenderWindow mWindow;
@@ -30,6 +32,7 @@ class Game {
         sf::Vector2f mMouseViewPosition;
         int mSpaceBetweenDoors = 300;
         UI mUI;
+        std::unordered_set<unsigned int> door_type_indexes;
 };
 
 #endif // GAME_H header guard

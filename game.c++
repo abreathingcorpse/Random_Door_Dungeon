@@ -10,6 +10,8 @@
 #include "ui.h++"
 #include <iostream>
 #include <string>
+#include <random>
+#include <time.h>
 
 Game::Game() : //mWindow(sf::VideoMode(1920,1080), "Random Door Dungeon", sf::Style::Fullscreen),
     mWindow(sf::VideoMode(1920,1080),
@@ -33,11 +35,37 @@ void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_
 }
 
 void Game::initializeDoors() {
-    for (int i = 0; i <= 2; i++) {
+
+    auto door_type_set_iterator = door_type_indexes.cbegin();
+
+    for (int i = 0; i < 3; i++) {
         sf::Vector2f doorPosition(580.f + i * mSpaceBetweenDoors,460.f);
-        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition, sf::Color::Red);
+//        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition, sf::Color::Red);
+        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition);
+        std::cout << *door_type_set_iterator << std::endl;
+        sf::Color doorColor = aDoor.available_door_colors[*door_type_set_iterator];
+        aDoor.setFillColor(doorColor);
+        ++door_type_set_iterator;
+
         mDoors.push_back(aDoor);
     }
+}
+
+void Game::generate_random_doors() {
+//    std::cout << std::time(0) << std::endl; // print seed for debugging purposes
+    std::default_random_engine random_engine(std::time(0));
+    std::uniform_int_distribution<unsigned int> uniform_distribution(0,3);
+
+    while (door_type_indexes.size() < 3) {
+        door_type_indexes.insert(uniform_distribution(random_engine));
+    }
+
+    // iterate over the set, for printing purposes
+//    auto set_it = door_type_indexes.cbegin();
+//    while (set_it != door_type_indexes.cend()) {
+//        std::cout << *set_it << std::endl;
+//        ++set_it;
+//    }
 }
 
 void Game::processEvents() {
@@ -173,8 +201,9 @@ void Game::run() {
 //    preConfigureText();
 //    mUI.loadFont();
 //    mUI.preConfigureText();
+    generate_random_doors();
     initializeDoors();
-//    mUI.setPosition(sf::Vector2f(80.f,80.f)); // Tested that when the position of UI changes, all of the child change as well
+//    mUI.setPosition(sf::Vector2f(200.f,200.f)); // Tested that when the position of UI changes, all of the child change as well
 
     while(mWindow.isOpen()){
         elapsedTime += clock.restart();

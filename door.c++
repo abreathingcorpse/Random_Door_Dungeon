@@ -18,12 +18,23 @@ Door::Door() :
     }
 
 // Constructor Initializer List
+Door::Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition) {
+        mDoorDimensions = DoorDimensions;
+        mDoorPosition = DoorPosition;
+        setSize(sf::Vector2f(mDoorDimensions.x,mDoorDimensions.y));
+        setFillColor(sf::Color::Red);
+        setPosition(mDoorPosition.x,mDoorPosition.y);
+}
+
 Door::Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition, 
     sf::Color DoorColor) {
         mDoorDimensions = DoorDimensions;
         mDoorPosition = DoorPosition;
         mDoorColor = DoorColor;
         setSize(sf::Vector2f(mDoorDimensions.x,mDoorDimensions.y));
-        setFillColor(sf::Color::Red);
+        setFillColor(mDoorColor);
         setPosition(mDoorPosition.x,mDoorPosition.y);
-    }
+}
+
+// Construct the 4 door types
+//const Door Door::Red{mDoorDimensions, mDoorPosition, sf::Color::Red};
