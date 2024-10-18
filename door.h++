@@ -17,6 +17,11 @@ class Door : public sf::RectangleShape {
         Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition,
             sf::Color DoorColor);
 
+        // Public methods
+//        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void loadClubSprite();
+
+        // Public members
         sf::Vector2f mDoorDimensions;
         sf::Vector2f mDoorPosition;
         sf::Color mDoorColor;
@@ -26,12 +31,17 @@ class Door : public sf::RectangleShape {
 //        static const Door Green;
 //        static const Door Blue;
 //        static const Door Gray;
-        std::vector<sf::Color> available_door_colors = {sf::Color::Red,
+        std::vector<sf::Color> mAvailableDoorColors = {sf::Color::Red,
                                                         sf::Color::Green,
                                                         sf::Color::Blue,
                                                         sf::Color::White};
 
+//        sf::Transformable mTransform;
+        sf::Sprite mWeaponSprite;
+
     private:
+        std::string mClubTexturePath = "resources/art/Club.png";
+        sf::Texture mClubTexture;
 };
 
 #endif // DOOR_G header guard

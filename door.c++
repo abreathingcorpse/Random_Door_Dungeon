@@ -5,6 +5,7 @@
 
 #endif // SFML_H header guard
 
+#include <iostream>
 #include "door.h++"
 
 // Default Constructor
@@ -36,5 +37,15 @@ Door::Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition,
         setPosition(mDoorPosition.x,mDoorPosition.y);
 }
 
-// Construct the 4 door types
-//const Door Door::Red{mDoorDimensions, mDoorPosition, sf::Color::Red};
+void Door::loadClubSprite() {
+    if (!mClubTexture.loadFromFile(mClubTexturePath)) {
+        std::cerr << "Could not load the Club Texture" << std::endl;
+    }
+    mWeaponSprite.setTexture(mClubTexture);
+    mWeaponSprite.setScale(4.f,4.f);
+    std::cout << "Texture loaded successfully" << std::endl;
+}
+
+//void Door::draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const {
+//    target.draw(mWeaponSprite);
+//}

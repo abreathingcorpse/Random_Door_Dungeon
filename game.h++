@@ -32,7 +32,9 @@ class Game {
         sf::Vector2f mMouseViewPosition;
         int mSpaceBetweenDoors = 300;
         UI mUI;
-        std::unordered_set<unsigned int> door_type_indexes;
+        std::unordered_set<unsigned int> mDoorTypeIndexes;
+//        sf::Texture mClubTexture;
+//        sf::Sprite mClubSprite;
 };
 
 #endif // GAME_H header guard

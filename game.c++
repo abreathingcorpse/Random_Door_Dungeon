@@ -36,28 +36,61 @@ void Game::resizeToAspectRatio(float desired_aspect_ratio, float current_aspect_
 
 void Game::initializeDoors() {
 
-    auto door_type_set_iterator = door_type_indexes.cbegin();
+    auto DoorTypeSetIterator = mDoorTypeIndexes.cbegin();
 
+    // Create the doors, set positions and colors
     for (int i = 0; i < 3; i++) {
-        sf::Vector2f doorPosition(580.f + i * mSpaceBetweenDoors,460.f);
-//        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition, sf::Color::Red);
-        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition);
-        std::cout << *door_type_set_iterator << std::endl;
-        sf::Color doorColor = aDoor.available_door_colors[*door_type_set_iterator];
-        aDoor.setFillColor(doorColor);
-        ++door_type_set_iterator;
 
+        sf::Vector2f doorPosition(580.f + i * mSpaceBetweenDoors,460.f);
+        Door aDoor = Door(sf::Vector2f(130.f,180.f), doorPosition);
+        
+        if (DoorTypeSetIterator == mDoorTypeIndexes.cend()) {
+            std::cerr << "DoorTypeSetIterator out of bounds." << std::endl;
+        }
+
+        sf::Color doorColor = aDoor.mAvailableDoorColors[*DoorTypeSetIterator];
+        aDoor.setFillColor(doorColor);
+
+//        if(*DoorTypeSetIterator == 0) {
+//            aDoor.loadClubSprite();
+//        }
+        aDoor.mWeaponSprite.setPosition(610.f + i * mSpaceBetweenDoors, 510.f);
         mDoors.push_back(aDoor);
+
+//        if(*DoorTypeSetIterator == 0) {
+//            mDoors[i].loadClubSprite();
+//        }
+
+        DoorTypeSetIterator++;
+    }
+
+    // Load respective weapon sprite
+    DoorTypeSetIterator = mDoorTypeIndexes.cbegin();
+    for (int i = 0; i < 3; i++) {
+        if (DoorTypeSetIterator == mDoorTypeIndexes.cend()) {
+            std::cerr << "DoorTypeSetIterator out of bounds." << std::endl;
+        }
+
+        std::cout << "i: " << i << std::endl;
+        std::cout << "*DoorTypeSetIterator: " << *DoorTypeSetIterator << std::endl;
+
+        if(*DoorTypeSetIterator == 0) {
+            mDoors[i].loadClubSprite();
+        }
+
+        DoorTypeSetIterator++;
     }
 }
 
 void Game::generate_random_doors() {
-//    std::cout << std::time(0) << std::endl; // print seed for debugging purposes
-    std::default_random_engine random_engine(std::time(0));
-    std::uniform_int_distribution<unsigned int> uniform_distribution(0,3);
+    std::mt19937 random_engine(std::time(0));
+    // Original
+//    std::uniform_int_distribution<unsigned int> uniform_distribution(0,3);
+    // Debugging only
+    std::uniform_int_distribution<unsigned int> uniform_distribution(0,2);
 
-    while (door_type_indexes.size() < 3) {
-        door_type_indexes.insert(uniform_distribution(random_engine));
+    while (mDoorTypeIndexes.size() < 3) {
+        mDoorTypeIndexes.insert(uniform_distribution(random_engine));
     }
 
     // iterate over the set, for printing purposes
@@ -169,10 +202,12 @@ void Game::render() {
     decltype(mDoors.size()) currentDoorIndex = 0; // currentDoorIndex share the same weird size type
 
     while (currentDoorIndex < numberOfDoors){
+        //std::cout << "currentDoorIndex: " << currentDoorIndex << std::endl;
         mWindow.draw(mDoors[currentDoorIndex]);
-//      mWindow.draw(mDoors[0]);
+        mWindow.draw(mDoors[currentDoorIndex].mWeaponSprite);
         currentDoorIndex++;
     }
+
 //    for (int i=0; i<3; i++) {
 //       mDoor.setPosition(mDoorX + i * (mDoorWidth + mSpaceBetweenDoors), mDoorY);
 //        mWindow.draw(mDoor);
@@ -180,6 +215,7 @@ void Game::render() {
 //   }
 //    mWindow.draw(mText);
     mWindow.draw(mUI);
+//    mWindow.draw(mClubSprite);
     mWindow.display();
 }
 
@@ -207,6 +243,12 @@ void Game::run() {
 
     while(mWindow.isOpen()){
         elapsedTime += clock.restart();
+
+//        if (!mClubTexture.loadFromFile("resources/art/Club.png")) {
+//            std::cerr << "Could not load the Club Texture";
+//        }
+//        mClubSprite.setTexture(mClubTexture);
+
         while (elapsedTime > framerate) {
             elapsedTime -= framerate;
             processEvents();
