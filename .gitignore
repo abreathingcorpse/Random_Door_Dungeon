@@ -6,3 +6,9 @@
 
 # IDE
 .vscode
+
+# Debug
+Debug
+
+# Documentation
+*.xmi
