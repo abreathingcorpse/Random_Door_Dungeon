@@ -85,9 +85,7 @@ void Game::initializeDoors() {
 void Game::generate_random_doors() {
     std::mt19937 random_engine(std::time(0));
     // Original
-//    std::uniform_int_distribution<unsigned int> uniform_distribution(0,3);
-    // Debugging only
-    std::uniform_int_distribution<unsigned int> uniform_distribution(0,2);
+    std::uniform_int_distribution<unsigned int> uniform_distribution(0,3);
 
     while (mDoorTypeIndexes.size() < 3) {
         mDoorTypeIndexes.insert(uniform_distribution(random_engine));
