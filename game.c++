@@ -71,11 +71,14 @@ void Game::initializeDoors() {
             std::cerr << "DoorTypeSetIterator out of bounds." << std::endl;
         }
 
-        std::cout << "i: " << i << std::endl;
-        std::cout << "*DoorTypeSetIterator: " << *DoorTypeSetIterator << std::endl;
-
         if(*DoorTypeSetIterator == 0) {
             mDoors[i].loadClubSprite();
+        } else if (*DoorTypeSetIterator == 1) {
+            mDoors[i].loadBowSprite();
+        } else if (*DoorTypeSetIterator == 2) {
+            mDoors[i].loadSpellbookSprite();
+        } else if (*DoorTypeSetIterator == 3) {
+            mDoors[i].loadKnifeSprite();
         }
 
         DoorTypeSetIterator++;

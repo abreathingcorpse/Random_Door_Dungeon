@@ -20,6 +20,9 @@ class Door : public sf::RectangleShape {
         // Public methods
 //        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         void loadClubSprite();
+        void loadBowSprite();
+        void loadSpellbookSprite();
+        void loadKnifeSprite();
 
         // Public members
         sf::Vector2f mDoorDimensions;
@@ -41,7 +44,10 @@ class Door : public sf::RectangleShape {
 
     private:
         std::string mClubTexturePath = "resources/art/Club.png";
-        sf::Texture mClubTexture;
+        std::string mBowTexturePath = "resources/art/Bow.png";
+        std::string mSpellbookTexturePath = "resources/art/Spellbook.png";
+        std::string mKnifeTexturePath = "resources/art/Knife.png";
+        sf::Texture mWeaponTexture;
 };
 
 #endif // DOOR_G header guard

@@ -38,14 +38,36 @@ Door::Door(sf::Vector2f DoorDimensions, sf::Vector2f DoorPosition,
 }
 
 void Door::loadClubSprite() {
-    if (!mClubTexture.loadFromFile(mClubTexturePath)) {
+    if (!mWeaponTexture.loadFromFile(mClubTexturePath)) {
         std::cerr << "Could not load the Club Texture" << std::endl;
     }
-    mWeaponSprite.setTexture(mClubTexture);
+    mWeaponSprite.setTexture(mWeaponTexture);
     mWeaponSprite.setScale(4.f,4.f);
-    std::cout << "Texture loaded successfully" << std::endl;
 }
 
+void Door::loadBowSprite() {
+    if (!mWeaponTexture.loadFromFile(mBowTexturePath)) {
+        std::cerr << "Could not load the Bow Texture" << std::endl;
+    }
+    mWeaponSprite.setTexture(mWeaponTexture);
+    mWeaponSprite.setScale(4.f,4.f);
+}
+
+void Door::loadSpellbookSprite() {
+    if (!mWeaponTexture.loadFromFile(mSpellbookTexturePath)) {
+        std::cerr << "Could not load the Spellbook Texture" << std::endl;
+    }
+    mWeaponSprite.setTexture(mWeaponTexture);
+    mWeaponSprite.setScale(4.f,4.f);
+}
+
+void Door::loadKnifeSprite() {
+    if (!mWeaponTexture.loadFromFile(mKnifeTexturePath)) {
+        std::cerr << "Could not load the Knife Texture" << std::endl;
+    }
+    mWeaponSprite.setTexture(mWeaponTexture);
+    mWeaponSprite.setScale(4.f,4.f);
+}
 //void Door::draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const {
 //    target.draw(mWeaponSprite);
 //}
