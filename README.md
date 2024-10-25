@@ -12,18 +12,22 @@ Within the Game::initializeDoors(), there's a couple of sections commented out.
 For some reason the game didn't work like intented within those sections.
 
 ### Commented out section 1
+```
 //        if(*DoorTypeSetIterator == 0) {
 //            aDoor.loadClubSprite();
 //        }
+```
 
 The textures for the sprite wouldn't load. They would render a blank Sprite.
 My hypothesis is that when calling mWeaponSprite within Game::render() a copy of the sprite is being called
 instead of the reference, causing issues.
 
 ### Commented out section 2
+```
 //        if(*DoorTypeSetIterator == 0) {
 //            mDoors[i].loadClubSprite();
 //        }
+```
 
 The texture would load only when i=2. Meaning, when mDoors reached its max size.
 My hypothesis is that for some reason one needs to wait for mDoors to be completely filled before using it.
