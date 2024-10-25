@@ -220,35 +220,16 @@ void Game::render() {
     mWindow.display();
 }
 
-//void Game::preConfigureText() {
-//    std::string pathToFontFile = "./resources/fonts/NotoSans-Regular.ttf";
-//    if(!mFont.loadFromFile(pathToFontFile)) {
-//        std::cout << "Unable to load the font." << std::endl;
-//    }
-//    mText.setFont(mFont);
-//    mText.setString("Str: ");
-//    mText.setCharacterSize(24);
-//    mText.setFillColor(sf::Color::White);
-//}
-
 void Game::run() {
     sf::Clock clock;
     sf::Time elapsedTime;
     const sf::Time framerate = sf::seconds(1.f/60); // .f forces it to be a float, so that it's not 0
-//    preConfigureText();
-//    mUI.loadFont();
-//    mUI.preConfigureText();
     generate_random_doors();
     initializeDoors();
 //    mUI.setPosition(sf::Vector2f(200.f,200.f)); // Tested that when the position of UI changes, all of the child change as well
 
     while(mWindow.isOpen()){
         elapsedTime += clock.restart();
-
-//        if (!mClubTexture.loadFromFile("resources/art/Club.png")) {
-//            std::cerr << "Could not load the Club Texture";
-//        }
-//        mClubSprite.setTexture(mClubTexture);
 
         while (elapsedTime > framerate) {
             elapsedTime -= framerate;

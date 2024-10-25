@@ -30,10 +30,6 @@ class Door : public sf::RectangleShape {
         sf::Color mDoorColor;
 
         // Define the 4 door types
-//        static const Door Red;
-//        static const Door Green;
-//        static const Door Blue;
-//        static const Door Gray;
         std::vector<sf::Color> mAvailableDoorColors = {sf::Color::Red,
                                                         sf::Color::Green,
                                                         sf::Color::Blue,
