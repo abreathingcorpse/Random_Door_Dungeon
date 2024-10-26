@@ -102,6 +102,21 @@ void Game::generate_random_doors() {
 //    }
 }
 
+std::pair<bool, int> Game::mouseInsideDoor() {
+    for (decltype(mDoors.size()) i=0; i < mDoors.size(); i++) {
+         if (
+            (mMouseViewPosition.x > mDoors[i].mDoorPosition.x &&
+            mMouseViewPosition.x < mDoors[i].mDoorPosition.x + mDoors[i].mDoorDimensions.x) &&
+            (mMouseViewPosition.y > mDoors[i].mDoorPosition.y &&
+            mMouseViewPosition.y < mDoors[i].mDoorPosition.y + mDoors[i].mDoorDimensions.y)
+        ) {
+            return std::make_pair(true,i);
+        }
+    }
+    // Default, whenever the mouse wasn't within a door
+    return std::make_pair(false,0);
+}
+
 void Game::processEvents() {
     sf::Event event;
 
@@ -159,25 +174,17 @@ void Game::processEvents() {
 //            std::cout << "Mouse position relative to the view: (" << mMouseViewPosition.x << "," << mMouseViewPosition.y << ")" << std::endl;
 //        }
 
+        // Check if a door is being hovered on
+        if (event.type == sf::Event::MouseMoved) {
+            std::pair<bool, int> mouseInsideDoorPair = mouseInsideDoor();
+            if (mouseInsideDoorPair.first)
+                        mDoors[mouseInsideDoorPair.second].setFillColor(sf::Color::Red);
+        }
         // Check if a door was clicked on
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-            for (decltype(mDoors.size()) i=0; i < mDoors.size(); i++) {
-//                int doorX0 = mDoorX + i * (mDoorWidth + mSpaceBetweenDoors);
-//                int doorX1 = mDoorX + mDoorWidth + i * (mDoorWidth + mSpaceBetweenDoors);
-//                std::cout << "doorX0: " << doorX0 << "," << "doorX1: " << doorX1 << std::endl;
-                if (
-//                    (mMouseViewPosition.x > mDoor.mDoorPosition.x &&
-//                    mMouseViewPosition.x < mDoor.mDoorPosition.x + mDoor.mDoorDimensions.x) &&
-//                    (mMouseViewPosition.y > mDoor.mDoorPosition.y &&
-//                    mMouseViewPosition.y < mDoor.mDoorPosition.y + mDoor.mDoorDimensions.y)
-                    (mMouseViewPosition.x > mDoors[i].mDoorPosition.x &&
-                    mMouseViewPosition.x < mDoors[i].mDoorPosition.x + mDoors[i].mDoorDimensions.x) &&
-                    (mMouseViewPosition.y > mDoors[i].mDoorPosition.y &&
-                    mMouseViewPosition.y < mDoors[i].mDoorPosition.y + mDoors[i].mDoorDimensions.y)
-                ) {
-                        mDoors[i].setFillColor(sf::Color::Green);
-                }
-            }
+            std::pair<bool, int> mouseInsideDoorPair = mouseInsideDoor();
+            if (mouseInsideDoorPair.first)
+                        mDoors[mouseInsideDoorPair.second].setFillColor(sf::Color::Green);
         }
     }
 }
@@ -203,20 +210,12 @@ void Game::render() {
     decltype(mDoors.size()) currentDoorIndex = 0; // currentDoorIndex share the same weird size type
 
     while (currentDoorIndex < numberOfDoors){
-        //std::cout << "currentDoorIndex: " << currentDoorIndex << std::endl;
         mWindow.draw(mDoors[currentDoorIndex]);
         mWindow.draw(mDoors[currentDoorIndex].mWeaponSprite);
         currentDoorIndex++;
     }
 
-//    for (int i=0; i<3; i++) {
-//       mDoor.setPosition(mDoorX + i * (mDoorWidth + mSpaceBetweenDoors), mDoorY);
-//        mWindow.draw(mDoor);
-//        mWindow.draw(mDoors[0]);
-//   }
-//    mWindow.draw(mText);
     mWindow.draw(mUI);
-//    mWindow.draw(mClubSprite);
     mWindow.display();
 }
 

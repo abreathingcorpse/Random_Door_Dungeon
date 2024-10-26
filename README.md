@@ -19,7 +19,7 @@ For some reason the game didn't work like intented within those sections.
 ```
 
 The textures for the sprite wouldn't load. They would render a blank Sprite.
-My hypothesis is that when calling mWeaponSprite within Game::render() a copy of the sprite is being called
+My hypothesis is that when calling `mWeaponSprite` within `Game::render()` a copy of the sprite is being called
 instead of the reference, causing issues.
 
 ### Commented out section 2
@@ -29,13 +29,15 @@ instead of the reference, causing issues.
 //        }
 ```
 
-The texture would load only when i=2. Meaning, when mDoors reached its max size.
-My hypothesis is that for some reason one needs to wait for mDoors to be completely filled before using it.
+The texture would load only when i=2. Meaning, when `mDoors` reached its max size.
+My hypothesis is that for some reason one needs to wait for `mDoors` to be completely filled before using it.
 
 Which is I came up with the following solution:
 
 I had to do a whole new loop because the code didn't behave the way that I though it would.
 You may find that loop after the following comment:
+```
 // Load respective weapon sprite
+```
 
 It's not the prettiest solution but, it works for now.
